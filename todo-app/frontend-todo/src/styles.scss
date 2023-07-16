@@ -1,0 +1,118 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$todo-frontend-primary: mat.define-palette(mat.$indigo-palette);
+$todo-frontend-accent: mat.define-palette(mat.$green-palette);
+
+// The warn palette is optional (defaults to red).
+$todo-frontend-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+
+$todo-frontend-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $todo-frontend-primary,
+      accent: $todo-frontend-accent,
+      warn: $todo-frontend-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($todo-frontend-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  line-height: 125%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* stili custom globali */
+
+/* tipografia */
+
+.g-title {
+  border-bottom: solid 1px #ccc;
+  line-height: 125%;
+}
+
+.g-form-title {
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  height: 50px !important;
+}
+
+/* helpers */
+
+.g-mb--0 {
+  margin-bottom: 0 !important;
+}
+
+.g-mb--24 {
+  margin-bottom: 48px !important;
+}
+
+.g-mr--12 {
+  margin-right: 12px !important;
+}
+
+.gml--12 {
+  margin-left: -12px !important;
+}
+
+/* stili personalizzati per i bottoni */
+
+.g-small-button {
+  min-width: 30px !important;
+  width: 30px !important;
+  height: 30px !important;
+  line-height: 24px !important;
+}
+
+.g-small-button mat-icon {
+  font-size: 16px !important;
+  height: 16px !important;
+  width: 16px !important;
+  line-height: 16px !important;
+}
+
+/* stili di spacing personalizzati */
+
+.g-vh-100 {
+  min-height: calc(100vh - 100px);
+}
+
+.g-flex-v {
+  display: flex;
+  flex-direction: column;
+}
+
+.g-mt-auto {
+  margin-top: auto;
+}
+
+.g-p-24 {
+  padding: 24px;
+}

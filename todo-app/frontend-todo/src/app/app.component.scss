@@ -1,0 +1,9 @@
+.main-container {
+  min-height: 100vh;
+}
+
+:host {
+  .mat-drawer-content {
+    display: flex;
+  }
+}

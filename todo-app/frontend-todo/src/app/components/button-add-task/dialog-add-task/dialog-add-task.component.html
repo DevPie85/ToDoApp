@@ -1,0 +1,63 @@
+<h2 mat-dialog-title class="g-form-title">
+  <mat-icon style="margin-right: 6px">add</mat-icon>Aggiungi un nuovo task
+</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="taskForm" style="display: flex; flex-direction: column">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input maxlength="25" #title matInput formControlName="title" />
+      <mat-hint align="start">{{ title.value.length }}/25</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        #description
+        maxlength="250"
+        formControlName="description"
+      ></textarea>
+      <mat-hint align="start">{{ description.value.length }}/250</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Created At</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="createdAt" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: space-between">
+      <mat-form-field style="width: 48%">
+        <mat-label>Priority</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option value="low">Low</mat-option>
+          <mat-option value="medium">Medium</mat-option>
+          <mat-option value="high">High</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 48%">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="todo">To do</mat-option>
+          <mat-option value="doing">Doing</mat-option>
+          <mat-option value="done">Done</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Indietro</button>
+
+  <button
+    mat-raised-button
+    [mat-dialog-close]="true"
+    [disabled]="!taskForm.valid"
+    (click)="postTask()"
+    color="accent"
+  >
+    Salva
+  </button>
+</mat-dialog-actions>

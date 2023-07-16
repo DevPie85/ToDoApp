@@ -1,0 +1,153 @@
+<div class="container-table">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    class="table-responsive"
+  >
+    <!-- Blocco Title -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header cdkDrag>Title</th>
+      <td mat-cell *matCellDef="let task">
+        <div [ngClass]="{ 'strike-through': task.status === 'done' }">
+          {{ task.title }}
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Blocco Description -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef cdkDrag>Description</th>
+      <td mat-cell *matCellDef="let task">
+        <div
+          class="tab-description"
+          [class.long-text]="isTextTooLong(task.description)"
+          (click)="task.isExpanded = !task.isExpanded"
+        >
+          <div
+            class="text-container"
+            [class.expanded]="task.isExpanded"
+            [ngClass]="{ 'strike-through': task.status === 'done' }"
+            [title]="task.description"
+          >
+            {{ task.description }}
+          </div>
+          <mat-icon *ngIf="isTextTooLong(task.description)" class="expand-icon"
+            >expand_more</mat-icon
+          >
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header cdkDrag>
+        Created At
+      </th>
+      <td mat-cell *matCellDef="let task">
+        {{ task.createdAt | date : "dd/MM/yy" }}
+      </td>
+    </ng-container>
+
+    <!-- Blocco priorità -->
+
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header cdkDrag>
+        Priority
+      </th>
+      <td mat-cell *matCellDef="let task">
+        <div style="display: flex; align-items: center">
+          <mat-icon
+            style="margin-right: 6px"
+            color="warn"
+            *ngIf="task.priority === 'high'"
+            >local_fire_department</mat-icon
+          >
+          <span *ngIf="task.priority === 'high'">{{ task.priority }}</span>
+        </div>
+
+        <div style="display: flex; align-items: center">
+          <mat-icon
+            style="margin-right: 6px"
+            color="primary"
+            *ngIf="task.priority === 'medium'"
+            >priority_high</mat-icon
+          >
+          <span *ngIf="task.priority === 'medium'">{{ task.priority }}</span>
+        </div>
+
+        <div style="display: flex; align-items: center">
+          <mat-icon
+            style="margin-right: 6px"
+            color="accent"
+            *ngIf="task.priority === 'low'"
+            >low_priority</mat-icon
+          >
+          <span *ngIf="task.priority === 'low'">{{ task.priority }}</span>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Blocco Status -->
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header cdkDrag>Status</th>
+      <td mat-cell *matCellDef="let task">
+        <div style="display: flex; align-items: center">
+          <mat-icon
+            style="margin-right: 6px"
+            color="primary"
+            *ngIf="task.status === 'todo'"
+            >check_box_outline_blank</mat-icon
+          >
+          <span *ngIf="task.status === 'todo'">{{ task.status }}</span>
+        </div>
+
+        <div style="display: flex; align-items: center">
+          <mat-icon
+            style="margin-right: 6px"
+            color="warn"
+            *ngIf="task.status === 'doing'"
+            >more_horiz</mat-icon
+          >
+          <span *ngIf="task.status === 'doing'">{{ task.status }}</span>
+        </div>
+
+        <div style="display: flex; align-items: center">
+          <mat-icon
+            style="margin-right: 6px"
+            color="accent"
+            *ngIf="task.status === 'done'"
+            >check_box</mat-icon
+          >
+          <span *ngIf="task.status === 'done'">{{ task.status }}</span>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Blocco Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef cdkDrag>Cancella/Modifica</th>
+      <td mat-cell *matCellDef="let task">
+        <app-button-delette-task
+          class="g-mr--12"
+          [task]="task"
+        ></app-button-delette-task>
+        <app-button-edit-task
+          class="g-ml--12"
+          [task]="task"
+        ></app-button-edit-task>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    class="table-responsive"
+    [pageSizeOptions]="[5]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

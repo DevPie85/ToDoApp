@@ -1,0 +1,19 @@
+<!-- Mostra solo se ci sono delle priorità -->
+<ng-container *ngIf="priorities.length > 0">
+  <span class="filter-label">Priority</span>
+  <div *ngFor="let priority of priorities">
+    <mat-checkbox (change)="toggleFilter(priority, 'priority')">
+      {{ priority }} ({{ priorityCounts[priority] }})
+    </mat-checkbox>
+  </div>
+</ng-container>
+
+<!-- Mostra solo se ci sono degli stati -->
+<ng-container *ngIf="statuses.length > 0">
+  <span class="filter-label">Status</span>
+  <div *ngFor="let status of statuses">
+    <mat-checkbox (change)="toggleFilter(status, 'status')">
+      {{ status }} ({{ statusCounts[status] }})
+    </mat-checkbox>
+  </div>
+</ng-container>

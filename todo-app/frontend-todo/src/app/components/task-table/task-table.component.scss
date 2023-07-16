@@ -1,0 +1,43 @@
+.container-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-responsive {
+  width: 100%;
+  min-width: 850px;
+}
+
+.tab-description {
+  display: flex;
+  width: fit-content;
+  padding: 14px 0;
+}
+
+.long-text {
+  cursor: pointer;
+}
+
+.text-container {
+  width: 200px; /* Imposta questo valore al limite desiderato */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-container.expanded {
+  white-space: normal;
+  overflow: visible;
+}
+
+.expand-icon {
+  display: inline-flex;
+}
+
+.text-container:not(.expanded):hover + .expand-icon {
+  display: inline-block;
+}
+
+.strike-through {
+  text-decoration: line-through;
+}

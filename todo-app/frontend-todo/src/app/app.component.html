@@ -1,0 +1,18 @@
+<mat-drawer-container class="main-container">
+  <mat-drawer #drawer mode="side" opened class="g-p-24">
+    <app-task-search-input></app-task-search-input>
+    <app-checkbox-filter-task-table></app-checkbox-filter-task-table>
+  </mat-drawer>
+  <mat-drawer-content class="g-p-24 g-flex-v">
+    <button
+      mat-mini-fab
+      color="primary"
+      aria-label="Example icon button with a filter list icon"
+      (click)="drawer.toggle()"
+    >
+      <mat-icon>filter_list</mat-icon>
+    </button>
+
+    <app-page-task class="g-vh-100 g-flex-v"></app-page-task>
+  </mat-drawer-content>
+</mat-drawer-container>
